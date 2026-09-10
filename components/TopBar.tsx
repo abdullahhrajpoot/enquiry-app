@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { createClient } from "@/lib/supabase/client";
@@ -18,7 +19,7 @@ export function TopBar({ fullName }: TopBarProps) {
     try {
       const supabase = createClient();
       await supabase.auth.signOut();
-      router.push("/login");
+      router.push("/");
       router.refresh();
     } finally {
       setLoggingOut(false);
@@ -27,9 +28,12 @@ export function TopBar({ fullName }: TopBarProps) {
 
   return (
     <header className="z-20 flex h-14 shrink-0 items-center justify-between border-b border-border bg-surface px-4 shadow-[0_1px_8px_-2px_rgba(28,27,26,0.08)] md:px-6">
-      <span className="font-heading text-base font-semibold tracking-tight text-ink">
+      <Link
+        href="/dashboard"
+        className="font-heading text-base font-semibold tracking-tight text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+      >
         Enquiries
-      </span>
+      </Link>
       <div className="flex min-w-0 items-center gap-3 md:gap-4">
         <span className="truncate text-sm text-ink-soft" title={fullName}>
           {fullName}

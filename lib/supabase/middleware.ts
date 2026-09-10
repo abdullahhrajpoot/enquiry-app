@@ -40,10 +40,13 @@ export async function updateSession(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
   const isAuthRoute = pathname === "/login" || pathname === "/signup";
+  const isProtectedRoute =
+    pathname === "/dashboard" || pathname.startsWith("/dashboard/");
 
-  if (!user && !isAuthRoute) {
+  if (!user && isProtectedRoute) {
     const url = request.nextUrl.clone();
     url.pathname = "/login";
+    url.searchParams.set("next", pathname);
     const redirectResponse = NextResponse.redirect(url);
     supabaseResponse.cookies.getAll().forEach(({ name, value }) => {
       redirectResponse.cookies.set(name, value);
@@ -53,7 +56,8 @@ export async function updateSession(request: NextRequest) {
 
   if (user && isAuthRoute) {
     const url = request.nextUrl.clone();
-    url.pathname = "/";
+    url.pathname = "/dashboard";
+    url.search = "";
     const redirectResponse = NextResponse.redirect(url);
     supabaseResponse.cookies.getAll().forEach(({ name, value }) => {
       redirectResponse.cookies.set(name, value);
