@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Enquiries
 
-## Getting Started
+A lightweight enquiry tracker for sales/ops teams. Capture inbound leads, assign owners, move them through status, and keep a clear activity history — without a bloated CRM.
 
-First, run the development server:
+## Tech stack
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **Next.js 16** (App Router) + **TypeScript**
+- **Tailwind CSS v4** (custom design tokens, no UI kit)
+- **Supabase** Auth + Postgres (`@supabase/ssr`, `@supabase/supabase-js`)
+- **lucide-react** for a few icons
+
+## Database schema
+
+Three tables (see `supabase/schema.sql`):
+
+| Table | Purpose |
+| --- | --- |
+| `profiles` | Staff identity (`id` → `auth.users`), `full_name`, `email`. Used for TopBar, owner dropdown, and activity attribution. |
+| `leads` | Enquiries: contact fields, `status`, optional `owner_id`, `created_by`, timestamps. |
+| `lead_activity` | Audit trail of meaningful changes (`created`, `status`, `owner_id`) so the team can see who did what. |
+
+`lead_activity` exists so status/owner changes stay attributable even after later edits. Inserts for status/owner are written by the app (with `changed_by`); a DB trigger logs the initial `created` event.
+
+## Setup
+
+### 1. Environment
+
+Copy `.env.local` (or create it) with:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://YOUR_PROJECT.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Database
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+In the Supabase SQL Editor, run the full script in `supabase/schema.sql`. That creates tables, RLS policies, the `updated_at` trigger, and the `created` activity trigger.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Auth setting
 
-## Learn More
+In Supabase → **Authentication** → **Providers** → **Email**:
 
-To learn more about Next.js, take a look at the following resources:
+- Disable **Confirm email** (or “Confirm email” / email verification) so signup can land on the dashboard immediately with a session.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Without this, `signUp` may return no session until the user clicks a confirmation link.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### 4. Run locally
 
-## Deploy on Vercel
+```bash
+npm install
+npm run dev
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Open [http://localhost:3000](http://localhost:3000).
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 5. Production build
+
+```bash
+npm run build
+npm start
+```
+
+## What I'd do next
+
+- Role-based permissions
+- Email notifications on assignment/status change
+- Bulk actions
+- CSV export
+- Soft-delete with undo

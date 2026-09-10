@@ -1,26 +1,53 @@
 @import "tailwindcss";
+@config "../tailwind.config.ts";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-bg: #FAFAF9;
+  --color-ink: #1C1B1A;
+  --color-ink-soft: #6B6864;
+  --color-accent: #2F5D8A;
+  --color-accent-soft: #E8EEF3;
+  --color-border: #E5E3DF;
+  --color-surface: #FFFFFF;
+
+  --status-new: #6B6864;
+  --status-new-soft: color-mix(in srgb, #6B6864 10%, transparent);
+  --status-contacted: #B8862E;
+  --status-contacted-soft: color-mix(in srgb, #B8862E 10%, transparent);
+  --status-qualified: #2F5D8A;
+  --status-qualified-soft: color-mix(in srgb, #2F5D8A 10%, transparent);
+  --status-won: #3D7A4F;
+  --status-won-soft: color-mix(in srgb, #3D7A4F 10%, transparent);
+  --status-lost: #B0413E;
+  --status-lost-soft: color-mix(in srgb, #B0413E 10%, transparent);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-bg: var(--color-bg);
+  --color-ink: var(--color-ink);
+  --color-ink-soft: var(--color-ink-soft);
+  --color-accent: var(--color-accent);
+  --color-accent-soft: var(--color-accent-soft);
+  --color-border: var(--color-border);
+  --color-surface: var(--color-surface);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-status-new: var(--status-new);
+  --color-status-new-soft: var(--status-new-soft);
+  --color-status-contacted: var(--status-contacted);
+  --color-status-contacted-soft: var(--status-contacted-soft);
+  --color-status-qualified: var(--status-qualified);
+  --color-status-qualified-soft: var(--status-qualified-soft);
+  --color-status-won: var(--status-won);
+  --color-status-won-soft: var(--status-won-soft);
+  --color-status-lost: var(--status-lost);
+  --color-status-lost-soft: var(--status-lost-soft);
+
+  --font-sans: var(--font-sans);
+  --font-heading: var(--font-heading);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans), sans-serif;
 }
