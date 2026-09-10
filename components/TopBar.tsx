@@ -26,7 +26,7 @@ export function TopBar({ fullName }: TopBarProps) {
   }
 
   return (
-    <header className="flex h-14 items-center justify-between border-b border-border bg-surface px-4 md:px-6">
+    <header className="z-20 flex h-14 shrink-0 items-center justify-between border-b border-border bg-surface px-4 shadow-[0_1px_8px_-2px_rgba(28,27,26,0.08)] md:px-6">
       <span className="font-heading text-base font-semibold tracking-tight text-ink">
         Enquiries
       </span>
@@ -38,7 +38,7 @@ export function TopBar({ fullName }: TopBarProps) {
           type="button"
           onClick={handleLogout}
           disabled={loggingOut}
-          className="shrink-0 rounded-md px-3 py-1.5 text-sm font-medium text-ink-soft transition-colors hover:bg-accent-soft hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-60"
+          className="btn-ghost shrink-0 px-3 py-1.5"
         >
           {loggingOut ? "Logging out..." : "Log out"}
         </button>

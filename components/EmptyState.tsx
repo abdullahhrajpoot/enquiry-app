@@ -4,7 +4,7 @@ type EmptyStateProps = {
 
 export function EmptyState({ onNewEnquiry }: EmptyStateProps) {
   return (
-    <div className="flex flex-col items-center justify-center px-6 py-20 text-center">
+    <div className="flex min-h-0 flex-1 flex-col items-center justify-center px-6 py-20 text-center">
       <svg
         width="120"
         height="88"
@@ -20,9 +20,19 @@ export function EmptyState({ onNewEnquiry }: EmptyStateProps) {
           width="84"
           height="60"
           rx="6"
+          fill="var(--color-surface)"
           stroke="currentColor"
           strokeWidth="1.5"
         />
+        <rect
+          x="18"
+          y="14"
+          width="84"
+          height="14"
+          rx="6"
+          fill="var(--color-accent-soft)"
+        />
+        <rect x="18" y="22" width="84" height="6" fill="var(--color-accent-soft)" />
         <path
           d="M18 28h84"
           stroke="currentColor"
@@ -38,6 +48,7 @@ export function EmptyState({ onNewEnquiry }: EmptyStateProps) {
         />
         <path
           d="M78 58l8-18 8 18h-16z"
+          fill="var(--color-accent-soft)"
           stroke="currentColor"
           strokeWidth="1.5"
           strokeLinejoin="round"
@@ -60,7 +71,7 @@ export function EmptyState({ onNewEnquiry }: EmptyStateProps) {
       <button
         type="button"
         onClick={onNewEnquiry}
-        className="mt-6 rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2"
+        className="btn-primary mt-6"
       >
         New Enquiry
       </button>

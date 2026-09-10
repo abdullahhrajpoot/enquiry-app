@@ -126,8 +126,12 @@ export function EnquiryTracker({
     }
   }
 
+  const listRevision =
+    initialLeads.map((lead) => `${lead.id}:${lead.updatedAt}`).join("|") +
+    `:${initialTotal}`;
+
   return (
-    <div className="flex flex-1 flex-col">
+    <div className="flex min-h-0 flex-1 flex-col">
       <Toolbar
         search={search}
         statusFilter={statusFilter}
@@ -139,20 +143,23 @@ export function EnquiryTracker({
       {total === 0 && !hasFilters ? (
         <EmptyState onNewEnquiry={() => setCreateOpen(true)} />
       ) : filteredLeads.length === 0 ? (
-        <div className="flex flex-1 flex-col items-center justify-center px-6 py-16 text-center">
+        <div className="flex min-h-0 flex-1 flex-col items-center justify-center px-6 py-16 text-center">
           <p className="text-sm text-ink-soft">
             No enquiries match your filters
           </p>
           <button
             type="button"
             onClick={clearFilters}
-            className="mt-3 text-sm font-medium text-accent hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="btn-ghost mt-3"
           >
             Clear filters
           </button>
         </div>
       ) : (
-        <>
+        <div
+          key={listRevision}
+          className="min-h-0 flex-1 animate-list-fade overflow-auto"
+        >
           <div className="md:hidden">
             {filteredLeads.map((lead) => (
               <LeadCard
@@ -181,7 +188,7 @@ export function EnquiryTracker({
             error={loadMoreError}
             onLoadMore={handleLoadMore}
           />
-        </>
+        </div>
       )}
 
       <Modal
@@ -241,7 +248,7 @@ export function EnquiryTracker({
             {deleteError}
           </p>
         ) : null}
-        <div className="mt-6 flex items-center justify-end gap-3">
+        <div className="mt-6 flex flex-wrap items-center justify-end gap-3">
           <button
             type="button"
             disabled={deleting}
@@ -249,7 +256,7 @@ export function EnquiryTracker({
               setPendingDelete(null);
               setDeleteError(null);
             }}
-            className="rounded-md px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:bg-accent-soft hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-60"
+            className="btn-ghost"
           >
             Cancel
           </button>
@@ -257,7 +264,7 @@ export function EnquiryTracker({
             type="button"
             disabled={deleting}
             onClick={confirmDeleteLead}
-            className="rounded-md bg-status-lost px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-status-lost focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+            className="btn-danger"
           >
             {deleting ? "Deleting..." : "Delete"}
           </button>

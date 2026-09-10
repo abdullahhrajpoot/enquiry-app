@@ -35,8 +35,8 @@ export default function LoginPage() {
   }
 
   return (
-    <main className="flex min-h-full flex-1 items-center justify-center px-4 py-16">
-      <div className="w-full max-w-md rounded-lg border border-border bg-surface p-8 shadow-sm">
+    <main className="flex min-h-0 flex-1 items-center justify-center overflow-y-auto px-4 py-16">
+      <div className="w-full max-w-md rounded-2xl border border-border bg-surface p-8 shadow-[0_4px_12px_rgba(28,27,26,0.06),0_16px_32px_rgba(28,27,26,0.08)]">
         <h1 className="font-heading text-2xl font-semibold tracking-tight text-ink">
           Log in
         </h1>
@@ -57,7 +57,7 @@ export default function LoginPage() {
               required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="rounded-md border border-border bg-bg px-3 py-2 text-sm text-ink outline-none transition-shadow focus:ring-2 focus:ring-accent"
+              className="field w-full"
             />
           </div>
 
@@ -73,7 +73,7 @@ export default function LoginPage() {
               required
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="rounded-md border border-border bg-bg px-3 py-2 text-sm text-ink outline-none transition-shadow focus:ring-2 focus:ring-accent"
+              className="field w-full"
             />
           </div>
 
@@ -89,7 +89,7 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+            className="btn-primary py-2.5"
           >
             {loading ? "Logging in..." : "Log in"}
           </button>

@@ -99,7 +99,7 @@ export function Modal({
       <button
         type="button"
         aria-label="Close dialog"
-        className="absolute inset-0 bg-ink/40"
+        className="absolute inset-0 bg-[rgba(28,27,26,0.5)] backdrop-blur-sm animate-fade-in"
         onClick={onClose}
       />
       <div
@@ -107,7 +107,7 @@ export function Modal({
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
-        className={`relative z-10 flex h-full w-full flex-col border-border bg-surface shadow-lg sm:h-auto sm:max-h-[min(92vh,840px)] sm:rounded-lg sm:border ${
+        className={`relative z-10 flex h-full w-full flex-col border-border bg-surface animate-modal-in shadow-[0_4px_12px_rgba(28,27,26,0.08),0_24px_48px_rgba(28,27,26,0.2)] sm:h-auto sm:max-h-[min(92vh,840px)] sm:rounded-2xl sm:border ${
           size === "lg" ? "sm:max-w-2xl" : "sm:max-w-lg"
         }`}
       >
@@ -122,7 +122,7 @@ export function Modal({
             type="button"
             onClick={onClose}
             aria-label="Close dialog"
-            className="rounded-md px-2 py-1 text-sm text-ink-soft transition-colors hover:bg-accent-soft hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+            className="btn-ghost px-2.5 py-1"
           >
             Close
           </button>

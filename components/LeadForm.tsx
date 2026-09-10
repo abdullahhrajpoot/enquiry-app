@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState, type FormEvent } from "react";
+import { ChevronDown } from "lucide-react";
 import { LEAD_STATUSES, type Lead, type LeadStatus, type Profile } from "@/types/lead";
 
 export type LeadFormValues = {
@@ -88,8 +89,7 @@ export function LeadForm({
     }
   }
 
-  const fieldClass =
-    "rounded-md border border-border bg-bg px-3 py-2 text-sm text-ink outline-none transition-shadow focus:ring-2 focus:ring-accent";
+  const fieldClass = "field w-full";
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
@@ -161,25 +161,31 @@ export function LeadForm({
           <label htmlFor={`${formId}-owner`} className="text-sm font-medium text-ink">
             Owner
           </label>
-          <select
-            id={`${formId}-owner`}
-            value={values.ownerId ?? ""}
-            onChange={(e) =>
-              setValues((v) => ({
-                ...v,
-                ownerId: e.target.value ? e.target.value : null,
-              }))
-            }
-            className={fieldClass}
-            disabled={submitting}
-          >
-            <option value="">Unassigned</option>
-            {profiles.map((profile) => (
-              <option key={profile.id} value={profile.id}>
-                {profile.fullName}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              id={`${formId}-owner`}
+              value={values.ownerId ?? ""}
+              onChange={(e) =>
+                setValues((v) => ({
+                  ...v,
+                  ownerId: e.target.value ? e.target.value : null,
+                }))
+              }
+              className={fieldClass}
+              disabled={submitting}
+            >
+              <option value="">Unassigned</option>
+              {profiles.map((profile) => (
+                <option key={profile.id} value={profile.id}>
+                  {profile.fullName}
+                </option>
+              ))}
+            </select>
+            <ChevronDown
+              className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft"
+              aria-hidden="true"
+            />
+          </div>
         </div>
 
         {isEdit ? (
@@ -187,24 +193,30 @@ export function LeadForm({
             <label htmlFor={`${formId}-status`} className="text-sm font-medium text-ink">
               Status
             </label>
-            <select
-              id={`${formId}-status`}
-              value={values.status}
-              onChange={(e) =>
-                setValues((v) => ({
-                  ...v,
-                  status: e.target.value as LeadStatus,
-                }))
-              }
-              className={fieldClass}
-              disabled={submitting}
-            >
-              {LEAD_STATUSES.map((status) => (
-                <option key={status} value={status}>
-                  {status}
-                </option>
-              ))}
-            </select>
+            <div className="relative">
+              <select
+                id={`${formId}-status`}
+                value={values.status}
+                onChange={(e) =>
+                  setValues((v) => ({
+                    ...v,
+                    status: e.target.value as LeadStatus,
+                  }))
+                }
+                className={fieldClass}
+                disabled={submitting}
+              >
+                {LEAD_STATUSES.map((status) => (
+                  <option key={status} value={status}>
+                    {status}
+                  </option>
+                ))}
+              </select>
+              <ChevronDown
+                className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-ink-soft"
+                aria-hidden="true"
+              />
+            </div>
           </div>
         ) : null}
       </div>
@@ -232,12 +244,12 @@ export function LeadForm({
         </p>
       ) : null}
 
-      <div className="flex items-center justify-end gap-3 pt-2">
+      <div className="flex flex-wrap items-center justify-end gap-3 pt-2">
         <button
           type="button"
           onClick={onCancel}
           disabled={submitting}
-          className="rounded-md px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:bg-accent-soft hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-60"
+          className="btn-ghost"
         >
           Cancel
         </button>
@@ -245,7 +257,7 @@ export function LeadForm({
           type="submit"
           disabled={submitting}
           aria-busy={submitting}
-          className="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+          className="btn-primary"
         >
           {submitting ? "Saving..." : (submitLabel ?? (isEdit ? "Save changes" : "Create enquiry"))}
         </button>

@@ -24,7 +24,7 @@ export function LeadCard({ lead, onOpen, onEdit, onDelete }: LeadCardProps) {
           onOpen(lead);
         }
       }}
-      className="cursor-pointer border-b border-border bg-surface px-4 py-4 transition-colors hover:bg-accent-soft/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
+      className="cursor-pointer border-b border-border bg-surface px-4 py-5 transition-colors duration-150 hover:bg-accent-soft/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-accent"
     >
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
@@ -52,7 +52,7 @@ export function LeadCard({ lead, onOpen, onEdit, onDelete }: LeadCardProps) {
               event.stopPropagation();
               onDelete(lead);
             }}
-            className="rounded-md p-2 text-ink-soft transition-colors hover:bg-status-lost-soft hover:text-status-lost focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-status-lost"
+            className="rounded-md border border-transparent p-2 text-status-lost transition-colors duration-150 hover:border-status-lost/30 hover:bg-status-lost-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-status-lost"
           >
             <Trash2 className="h-4 w-4" />
           </button>

@@ -20,7 +20,7 @@ export default async function Home() {
     ]);
 
     return (
-      <main className="flex flex-1 flex-col">
+      <main className="flex min-h-0 flex-1 flex-col">
         <EnquiryTracker
           initialLeads={leads}
           initialTotal={total}
@@ -35,7 +35,7 @@ export default async function Home() {
         : "We couldn’t load your enquiries. Please try again.";
 
     return (
-      <main className="flex flex-1 flex-col">
+      <main className="flex min-h-0 flex-1 flex-col">
         <LoadError message={message} />
       </main>
     );

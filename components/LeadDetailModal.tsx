@@ -150,7 +150,7 @@ export function LeadDetailModal({
           <button
             type="button"
             onClick={() => setConfirmDelete(true)}
-            className="text-sm font-medium text-status-lost transition-colors hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-status-lost"
+            className="btn-danger"
           >
             Delete enquiry
           </button>
@@ -178,12 +178,12 @@ export function LeadDetailModal({
             {deleteError}
           </p>
         ) : null}
-        <div className="mt-6 flex items-center justify-end gap-3">
+        <div className="mt-6 flex flex-wrap items-center justify-end gap-3">
           <button
             type="button"
             disabled={deleting}
             onClick={() => setConfirmDelete(false)}
-            className="rounded-md px-3 py-2 text-sm font-medium text-ink-soft transition-colors hover:bg-accent-soft hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-60"
+            className="btn-ghost"
           >
             Cancel
           </button>
@@ -191,7 +191,7 @@ export function LeadDetailModal({
             type="button"
             disabled={deleting}
             onClick={handleDelete}
-            className="rounded-md bg-status-lost px-4 py-2 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-status-lost focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+            className="btn-danger"
           >
             {deleting ? "Deleting..." : "Delete"}
           </button>

@@ -25,7 +25,7 @@ export function LoadError({
         type="button"
         disabled={pending}
         onClick={() => startTransition(() => router.refresh())}
-        className="mt-6 rounded-md bg-accent px-4 py-2.5 text-sm font-semibold text-white transition-opacity hover:opacity-90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-60"
+        className="btn-primary mt-6"
       >
         {pending ? "Retrying..." : "Try again"}
       </button>

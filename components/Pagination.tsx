@@ -27,7 +27,7 @@ export function Pagination({
             onClick={onLoadMore}
             disabled={loading}
             aria-busy={loading}
-            className="inline-flex items-center gap-2 rounded-md border border-border bg-surface px-4 py-2 text-sm font-medium text-ink transition-colors hover:bg-accent-soft hover:text-accent focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent disabled:cursor-not-allowed disabled:opacity-60"
+            className="btn-ghost inline-flex items-center gap-2"
           >
             {loading ? (
               <>
